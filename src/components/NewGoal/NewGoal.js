@@ -1,30 +1,33 @@
-import React from "react";
+import React, {useState} from "react";
  
 const NewGoal = props => {
-    let enteredText = '';
-        const addGoalHandler = event => {
-            event.preventDefault();
+    //let enteredText = '';
+    const [enteredText, setEnteredText] = useState('');
+    
+    const addGoalHandler = event => {
+        event.preventDefault();
 
-            const newGoal ={
-               
+        const newGoal ={
 
-                id: Math.random().toString(),
-                "message" : enteredText
-
-            };
-        console.log(newGoal);
-        props.onAddGoal(newGoal);//holds pointer to function, funciton 
-        //pass has arugment to newGoal (above) param
+        id: Math.random().toString(),
+        "message" : enteredText,
+        number : 22
         
+    };
+        console.log(newGoal.number)
+        setEnteredText('');
+        //holds pointer to function, funciton 
+        //pass has arugment to newGoal (above) param
+        props.onAddGoal(newGoal);
         };
 
         const textChangeHandler = event => {
-           enteredText = event.target.value;
+            setEnteredText(event.target.value);
         };
     
     return(
         <form className="new-goal" onSubmit={addGoalHandler}>
-            <input type="text" onChange={textChangeHandler}/>
+            <input type="text" value={enteredText} onChange={textChangeHandler}/>
             <button type="submit">Add Data</button>
         </form>
 
